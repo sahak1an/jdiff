@@ -13,9 +13,10 @@ public abstract class AbstractPrimitiveAndOther {
             return null;
         } else if (element.isJsonObject()) {
             //element.getAsString()
-            return "{Omitted internal character}";
+            return element.toString();
         } else if (element.isJsonArray()) {
-            return "[Omitted internal elements]";
+            return element.toString();
+           // return "[Omitted internal elements]";
         } else if (element.isJsonPrimitive()) {
             return element.getAsJsonPrimitive().getAsString();
         } else if (element.isJsonNull()) {
