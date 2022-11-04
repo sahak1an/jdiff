@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 
 import com.sahakian.jsondiff.model.Result;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 class DiffTest {
@@ -49,7 +50,7 @@ class DiffTest {
             }]
             }""";
 
-    @Test
+    @RepeatedTest(500)
     void diff() {
         List<Result> diff = new Diff().diff(actual, old);
         var x =9;

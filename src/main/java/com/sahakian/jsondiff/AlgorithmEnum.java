@@ -12,7 +12,7 @@ import com.sahakian.jsondiff.algorithm.primitive.DefaultPrimitiveComparator;
 public enum AlgorithmEnum {
     DEFAULT(defaultAlgorithmModule()),
     SIMPLE_ARRAY_AND_SIMPLE_OBJECT(simpleAndSimpleAlgorithmModule()),
-    SIMPLE_ARRAY_AND_LEFTJOIN_OBJECT(simpleAndLeftJoinAlgorithmModule()),
+    SIMPLE_ARRAY_AND_LEFT_JOIN_OBJECT(simpleAndLeftJoinAlgorithmModule()),
     SIMLAR_ARRAY_AND_LEFTJOIN_OBJECT(similarAndLeftJoinAlgorithmModule()),
     MOST_COMMONLY_USED(similarAndSimpleAlgorithmModule());
 

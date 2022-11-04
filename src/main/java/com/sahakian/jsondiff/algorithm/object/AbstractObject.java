@@ -1,5 +1,7 @@
 package com.sahakian.jsondiff.algorithm.object;
 
+import static com.sahakian.jsondiff.model.Constants.*;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -72,6 +74,6 @@ public abstract class AbstractObject extends AbstractObjectAndArray implements O
         }
         return path.stream()
             .filter(e -> e.charAt(0) != '[')
-            .collect(Collectors.joining(Constants.MERGE_PATH));
+            .collect(Collectors.joining(MERGE_PATH));
     }
 }

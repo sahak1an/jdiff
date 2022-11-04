@@ -10,5 +10,4 @@ public class LeftJoinObjectComparator extends AbstractObject  {
     public DiffContext diff(JsonObject a, JsonObject b, PathModule pathModule){
         return diffValueByKey(a, b, a.keySet(), pathModule);
     }
-
 }

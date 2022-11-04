@@ -1,5 +1,7 @@
 package com.sahakian.jsondiff.algorithm.other;
 
+import static com.sahakian.jsondiff.model.Constants.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,14 +16,14 @@ public class DefaultOtherComparator extends AbstractPrimitiveAndOther implements
 
     @Override
     public DiffContext diff(JsonElement a, JsonElement b, PathModule pathModule) {
-        DiffContext otherDiffContext = new DiffContext(Constants.DIFFERENT);
-        List<SingleNodeDifference> singleNodeDifferences = new ArrayList<>();
+        DiffContext otherDiffContext = new DiffContext(DIFFERENT);
 
-        String left = String.join(Constants.MERGE_PATH, pathModule.getLeftPath());
-        String right = String.join(Constants.MERGE_PATH, pathModule.getRightPath());
+        String left = String.join(MERGE_PATH, pathModule.getLeftPath());
+        String right = String.join(MERGE_PATH, pathModule.getRightPath());
 
-        singleNodeDifferences.add(new SingleNodeDifference(left, right, jsonElement2Str(a), jsonElement2Str(b)));
-        otherDiffContext.setDiffResultModels(singleNodeDifferences);
+        SingleNodeDifference singleNodeDiff = new SingleNodeDifference(left, right, jsonElement2Str(a), jsonElement2Str(b));
+
+        otherDiffContext.setDiffResultModels(List.of(singleNodeDiff));
         return otherDiffContext;
     }
 }

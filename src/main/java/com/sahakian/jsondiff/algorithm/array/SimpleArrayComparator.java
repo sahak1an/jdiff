@@ -9,7 +9,7 @@ public class SimpleArrayComparator extends AbstractArray  {
     public DiffContext diffArray(JsonArray a, JsonArray b, PathModule pathModule) {
         DiffContext arrayDiffContext = new DiffContext();
         int maxLength = Math.max(a.size(), b.size());
-        //根据数组a和b长度的大的值进行遍历
+
         for (int i = 0; i < maxLength; i++) {
             pathModule.addAllpath(constructArrayPath(i));
             DiffContext diffContext =  generateDiffResult(a,b,i,pathModule);
@@ -20,7 +20,8 @@ public class SimpleArrayComparator extends AbstractArray  {
 
     private DiffContext generateDiffResult(JsonArray a, JsonArray b, int i, PathModule pathModule) {
         if(i >= a.size() && i >= b.size()){
-            throw new RuntimeException("数组索引号入参超过数组长度。 索引号:" + i + " 数组a:" + a + "数组b：" + b);
+            throw new RuntimeException(
+                "The input parameter of the array index number exceeds the length of the array. Index number:" + i + " array a:" + a + "array b：" + b);
         }
         DiffContext diffContext;
         if(i < a.size() && i < b.size()){

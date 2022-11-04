@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class SimilarArrayComparator extends AbstractArray {
-    private final boolean USEABLE = false;
+    private final boolean USABLE = false;
     private final boolean USED = true;
 
     @Override
@@ -50,12 +50,12 @@ public class SimilarArrayComparator extends AbstractArray {
     }
 
     DiffContext diff(JsonArray a, JsonArray b, PathModule pathModule ) {
-        int rowlength = a.size();
-        int linelength = b.size();
-        int[][] similarMatrix = new int[rowlength][linelength];
-        boolean []row = new boolean[rowlength];
-        boolean []line = new boolean[linelength];
-        for (int i = 0; i < rowlength; i++) {
+        int rowLength = a.size();
+        int lineLength = b.size();
+        int[][] similarMatrix = new int[rowLength][lineLength];
+        boolean []row = new boolean[rowLength];
+        boolean []line = new boolean[lineLength];
+        for (int i = 0; i < rowLength; i++) {
             pathModule.addLeftPath(constructArrayPath(i));
             constructSimilarMatrix(a, b, i, pathModule, similarMatrix, row, line);
             pathModule.removeLastLeftPath();
@@ -84,7 +84,7 @@ public class SimilarArrayComparator extends AbstractArray {
     private void obtainModifyDiffResult(JsonArray a, JsonArray b, PathModule pathModule, boolean[] row, boolean[] line, int[][] similarMatrix, DiffContext arrayDiffContext) {
         int counts = 0;
         for (boolean value : row) {
-            if (Objects.equals(USEABLE, value)) {
+            if (Objects.equals(USABLE, value)) {
                 counts++;
             }
         }
@@ -126,11 +126,12 @@ public class SimilarArrayComparator extends AbstractArray {
     }
     private void constructSimilarMatrix(JsonArray arrayA, JsonArray arrayB, int  rowIndex, PathModule pathModule, int [][]similarArray, boolean[] row, boolean[] line) {
         if(rowIndex < 0 || rowIndex >= arrayB.size()){
-            throw new RuntimeException("索引号入参超出数组长度。 索引号：" + rowIndex +" 数组B:" + arrayB);
+            throw new RuntimeException(
+                "The index number input parameter exceeds the length of the array. Index number：" + rowIndex +" array B:" + arrayB);
         }
 
         for (int j = 0; j < arrayB.size(); j++) {
-            if (line[j] == USEABLE) {
+            if (line[j] == USABLE) {
                 pathModule.addRightPath(constructArrayPath(j));
                 DiffContext diffContext = diffElement(arrayA.get(rowIndex), arrayB.get(j), pathModule);
                 pathModule.removeLastRightPath();
