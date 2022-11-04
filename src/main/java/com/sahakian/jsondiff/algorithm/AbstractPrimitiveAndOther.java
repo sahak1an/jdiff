@@ -1,13 +1,18 @@
 package com.sahakian.jsondiff.algorithm;
 
+import java.util.Optional;
+
 import com.google.gson.JsonElement;
 
 public abstract class AbstractPrimitiveAndOther {
     protected static String jsonElement2Str(JsonElement element){
-        //该对象不存在的情况
+     // return Optional.ofNullable(element)
+     //     .map(JsonElement::getAsString)
+     //     .orElseThrow();
         if(element == null){
             return null;
         } else if (element.isJsonObject()) {
+            //element.getAsString()
             return "{Omitted internal character}";
         } else if (element.isJsonArray()) {
             return "[Omitted internal elements]";

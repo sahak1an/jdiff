@@ -9,6 +9,4 @@ public class DefaultNullComparator implements NullComparator {
     public DiffContext diff(JsonNull a, JsonNull b, PathModule pathModule){
         return new DiffContext();
     }
-
-
 }

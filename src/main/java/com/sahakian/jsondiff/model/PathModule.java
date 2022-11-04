@@ -59,9 +59,6 @@ public class PathModule {
         this.rightPath = rightPath;
     }
 
-    /**
-     * 同时在A和B路径列表最后加上一个Path路径
-     */
     public void addAllpath(String lastPath) {
         leftPath.add(lastPath);
         rightPath.add(lastPath);
@@ -75,29 +72,17 @@ public class PathModule {
         rightPath.add(lastPath);
     }
 
-
-    /**
-     * 同时移除A和B路径列表中最后的一个路径
-     */
     public void removeAllLastPath() {
         leftPath.removeLast();
         rightPath.removeLast();
     }
 
-    /**
-     * 移除A路径列表中最后的一个路径
-     */
     public void removeLastLeftPath() {
         leftPath.removeLast();
     }
 
-    /**
-     * 移除B路径列表中最后的一个路径
-     */
     public void removeLastRightPath() {
         rightPath.removeLast();
     }
-
-
 }
 

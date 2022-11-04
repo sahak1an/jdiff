@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.google.common.base.Joiner;
 import com.google.gson.JsonObject;
 import com.sahakian.jsondiff.algorithm.AbstractObjectAndArray;
 import com.sahakian.jsondiff.model.Constants;
@@ -33,12 +32,12 @@ public abstract class AbstractObject extends AbstractObjectAndArray implements O
         return objectDiffContext;
     }
 
-    private void specialPathHandle(boolean isSame,LinkedList<String> specialPathResult, PathModule pathModule) {
-        if (!isSame){
+    private void specialPathHandle(boolean isSame, LinkedList<String> specialPathResult, PathModule pathModule) {
+        if (!isSame) {
             return;
         }
         String specialPath = getSpecialPath(pathModule);
-        if( existPath(specialPath)){
+        if (existPath(specialPath)) {
             specialPathResult.add(specialPath);
         }
     }
@@ -48,11 +47,11 @@ public abstract class AbstractObject extends AbstractObjectAndArray implements O
     }
 
     protected String getSpecialPath(PathModule pathModule) {
-        if(pathModule == null || pathModule.getSpecialPath() == null || pathModule.getSpecialPath().isEmpty()){
+        if (pathModule == null || pathModule.getSpecialPath() == null || pathModule.getSpecialPath().isEmpty()) {
             return null;
         }
         String currentPath = listJoin(pathModule.getLeftPath());
-        if(pathModule.getSpecialPath().contains(currentPath)){
+        if (pathModule.getSpecialPath().contains(currentPath)) {
             return currentPath;
         }
         return null;
@@ -68,10 +67,11 @@ public abstract class AbstractObject extends AbstractObjectAndArray implements O
     }
 
     protected String listJoin(LinkedList<String> path) {
-        if(path == null){
+        if (path == null) {
             throw new RuntimeException("Path is null");
         }
-        List<String> collect = path.stream().filter(e -> e.charAt(0) != '[').collect(Collectors.toList());
-        return Joiner.on(Constants.MERGE_PATH).join(collect);
+        return path.stream()
+            .filter(e -> e.charAt(0) != '[')
+            .collect(Collectors.joining(Constants.MERGE_PATH));
     }
 }
