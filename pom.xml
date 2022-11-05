@@ -17,9 +17,6 @@
 	</properties>
 
 	<dependencies>
-
-
-		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
@@ -31,7 +28,6 @@
 			<artifactId>gson</artifactId>
 			<version>2.10</version>
 		</dependency>
-
 	</dependencies>
 
 	<build>

@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class SimilarArrayComparator extends AbstractArray {
-    private final boolean USABLE = false;
-    private final boolean USED = true;
 
     @Override
     public DiffContext diffArray(JsonArray a, JsonArray b, PathModule pathModule) {
@@ -73,7 +71,7 @@ public class SimilarArrayComparator extends AbstractArray {
 
     private void obtainAddDiffResult(JsonArray b, PathModule pathModule, boolean[] line, DiffContext arrayDiffContext) {
         for (int j = 0; j < line.length; j++) {
-            if (line[j] == USED) {
+            if (line[j]) {
                 continue;
             }
             DiffContext addOrDeleteDiffContext = constructAddContext(b, j, pathModule);
@@ -84,7 +82,7 @@ public class SimilarArrayComparator extends AbstractArray {
     private void obtainModifyDiffResult(JsonArray a, JsonArray b, PathModule pathModule, boolean[] row, boolean[] line, int[][] similarMatrix, DiffContext arrayDiffContext) {
         int counts = 0;
         for (boolean value : row) {
-            if (Objects.equals(USABLE, value)) {
+            if (!value) {
                 counts++;
             }
         }
@@ -94,7 +92,7 @@ public class SimilarArrayComparator extends AbstractArray {
             int minDiffPair = Integer.MAX_VALUE;
             for (int i = 0; i < row.length; i++) {
                 for (int j = 0; j < line.length; j++) {
-                    if (row[i] == USED || line[j] == USED) {
+                    if (row[i] || line[j]) {
                         continue;
                     }
                     if (similarMatrix[i][j] < minDiffPair) {
@@ -105,8 +103,8 @@ public class SimilarArrayComparator extends AbstractArray {
                 }
             }
             DiffContext modifyDiffContext = constructModifyContext(a, b, bestRowIndex, bestLineIndex, pathModule);
-            row[bestRowIndex] = USED;
-            line[bestLineIndex] = USED;
+            row[bestRowIndex] = true;
+            line[bestLineIndex] = true;
             parentContextAddChildContext(arrayDiffContext, modifyDiffContext);
         }
     }
@@ -131,13 +129,13 @@ public class SimilarArrayComparator extends AbstractArray {
         }
 
         for (int j = 0; j < arrayB.size(); j++) {
-            if (line[j] == USABLE) {
+            if (line[j]) {
                 pathModule.addRightPath(constructArrayPath(j));
                 DiffContext diffContext = diffElement(arrayA.get(rowIndex), arrayB.get(j), pathModule);
                 pathModule.removeLastRightPath();
                 if (diffContext.isSame()) {
-                    row[rowIndex] = USED;
-                    line[j] = USED;
+                    row[rowIndex] = true;
+                    line[j] = true;
                     return;
                 } else if(existSpecialPath(diffContext.getSpecialPathResult())){
                     similarArray[rowIndex][j] = 0 ;
